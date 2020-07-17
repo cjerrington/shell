@@ -1,6 +1,6 @@
 #!/bin/bash
 echo Local IPv4:
-ip -4 a show eth0 | grep -Po 'inet \K[0-9.]*'
+ifconfig `route | grep ^default | sed "s/.* //"` | grep -Po '(?<=inet )[\d.]+' | awk '{print $1}'
 
 echo 
 echo Public IP:
